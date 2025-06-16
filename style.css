@@ -1,0 +1,649 @@
+/* ======================================================= */
+/* 1. ESTILOS GERAIS E RESET                               */
+/* ======================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    /* Fonte limpa e padrão */
+}
+
+body {
+    background-image: url('imagens/fundo_pagina_inicial.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: white;
+}
+
+/* ======================================================= */
+/* 2. HEADER E LAYOUT PRINCIPAL (DESKTOP)                  */
+/* ======================================================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(30, 30, 30, 0.85);
+    padding: 10px 40px;
+    /* Espaçamento interno nas laterais */
+    position: relative;
+    /* Essencial para o posicionamento do menu mobile */
+
+}
+
+.logo img {
+    height: 50px;
+    display: block;
+    /* Evita espaços indesejados abaixo da imagem */
+}
+
+/* ======================================================= */
+/* 3. NAVEGAÇÃO INTERATIVA (DESKTOP)                       */
+/* ======================================================= */
+.navegacao {
+    display: flex;
+    align-items: center;
+    gap: 2.5em;
+    /* Espaço entre os botões */
+}
+
+.navegacao button {
+    background: transparent;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+
+    /* Técnica para evitar que o layout "pule" ao adicionar a borda */
+    border: 2px solid transparent;
+    padding: 8px 25px;
+    border-radius: 4px;
+    transition: border-color 0.2s ease-in-out;
+    /* Transição suave */
+}
+
+/* Classe que o JavaScript move para o botão ativo */
+.navegacao button.selecionado {
+    border-color: white;
+    /* Torna a borda visível */
+}
+
+/* Esconde o botão de suporte que só aparecerá no menu mobile */
+.btn-suporte-mobile {
+    display: none;
+}
+
+/* ======================================================= */
+/* 4. SEÇÃO DE SUPORTE (DESKTOP)                           */
+/* ======================================================= */
+.suporte-desktop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    /* Espaço entre o ícone e o texto */
+}
+
+.suporte-desktop img {
+    height: 35px;
+}
+
+.suporte-desktop button {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+
+/* ======================================================= */
+/* 5. MENU HAMBÚRGUER (ESCONDIDO NO DESKTOP)               */
+/* ======================================================= */
+.menu-hamburger {
+    display: none;
+    /* Escondido por padrão em telas grandes */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 5px;
+    /* Espaço entre as barras do ícone */
+}
+
+.menu-hamburger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* ======================================================= */
+/* 6. MEDIA QUERY - DESIGN RESPONSIVO PARA MOBILE          */
+/* Aplicado em telas com largura máxima de 768px           */
+/* ======================================================= */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 20px;
+        /* Reduz o espaçamento nas laterais */
+    }
+
+    /* Esconde elementos do Desktop */
+    .suporte-desktop {
+        display: none;
+    }
+
+    /* Mostra o ícone do menu hambúrguer */
+    .menu-hamburger {
+        display: flex;
+    }
+
+    /* Estiliza o menu de navegação quando estiver ativo no mobile */
+    .navegacao {
+        display: none;
+        /* Escondido até o JS adicionar a classe '.ativo' */
+        position: absolute;
+        top: 100%;
+        /* Posiciona logo abaixo do header */
+        left: 0;
+        width: 100%;
+        background-color: rgba(30, 30, 30, 0.98);
+        flex-direction: column;
+        /* Organiza os botões verticalmente */
+        padding: 10px 0;
+        gap: 0;
+        /* Remove o gap para os botões ocuparem toda a largura */
+    }
+
+    .navegacao.ativo {
+        display: flex;
+        /* Torna o menu visível */
+    }
+
+    /* Estiliza os botões dentro do menu mobile */
+    .navegacao button {
+        width: 100%;
+        border: none;
+        /* Remove a borda usada no desktop */
+        padding: 18px 0;
+        /* Aumenta a área de toque */
+        border-radius: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navegacao button:last-child {
+        border-bottom: none;
+        /* Remove a borda do último item */
+    }
+
+    /* Mostra o botão de suporte dentro do menu mobile */
+    .btn-suporte-mobile {
+        display: block;
+    }
+
+    /* Destaque para o item selecionado no menu mobile */
+    .navegacao button.selecionado {
+        background-color: rgba(255, 255, 255, 0.1);
+        /* Destaque sutil */
+        border-color: transparent;
+        /* Garante que a borda do desktop não apareça */
+    }
+}
+
+/* ======================================================= */
+/* 7. BARRA DE PESQUISA ABAIXO DO HEADER                   */
+/* ======================================================= */
+.barra-pesquisa {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    margin: 20px auto;
+    /* Centraliza a barra */
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    /* Distribui os campos */
+    align-items: center;
+    max-width: 90%;
+    /* Largura máxima para não ocupar toda a tela */
+}
+
+.campo-pesquisa {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo-pesquisa label {
+    font-size: 0.8rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.input-com-icone {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.input-com-icone input {
+    border: none;
+    padding: 8px;
+    flex-grow: 1;
+    /* O input ocupa o espaço restante */
+    outline: none;
+}
+
+.input-com-icone img {
+    height: 20px;
+    margin-left: 8px;
+    opacity: 0.7;
+}
+
+.botao-pesquisar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.botao-pesquisar:hover {
+    background-color: #0056b3;
+}
+
+/* ======================================================= */
+/* 8. SEÇÃO DE ANÚNCIOS (SLIDER)                           */
+/* ======================================================= */
+.anuncios-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 95%;
+    margin: 20px auto;
+}
+
+.anuncios-slider {
+    display: flex;
+    overflow: hidden;
+    /* Esconde os anúncios que não estão visíveis */
+    width: 100%;
+    /* O slider ocupa o espaço entre os botões */
+}
+
+.anuncio {
+    flex: 0 0 100%;
+    /* Não encolhe nem estica, ocupa 100% da largura do container */
+    padding: 20px;
+    text-align: center;
+}
+
+.anuncio.ativo {
+    /* Estilos para o anúncio atualmente visível (pode adicionar mais) */
+}
+
+.anuncio p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.anuncio img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.botao-anterior,
+.botao-proximo {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    outline: none;
+}
+
+.botao-anterior img,
+.botao-proximo img {
+    height: 30px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.botao-anterior:hover img,
+.botao-proximo:hover img {
+    opacity: 1;
+}
+
+/* Esconde as setas em telas muito pequenas se necessário */
+@media (max-width: 600px) {
+    .anuncios-container button {
+        display: none;
+    }
+
+    .anuncios-slider {
+        padding: 0 40px;
+        /* Adiciona um pouco de espaço nas laterais */
+    }
+}
+
+/* ======================================================= */
+/* 7. SEÇÃO DE PESQUISA (DESIGN ATUALIZADO)                */
+/* ======================================================= */
+
+/* ======================================================= */
+/* 7. SEÇÃO DE PESQUISA (DESIGN FINAL - CONFORME IMAGEM)   */
+/* ======================================================= */
+
+.secao-pesquisa {
+    width: 100%;
+    /* O fundo da imagem continua o mesmo */
+    background-image: url('imagens/fundo_pagina_inicial.png');
+    background-size: cover;
+    background-position: center;
+    padding: 40px 20px;
+    /* Espaçamento para a seção respirar */
+}
+
+/* Painel de fundo com transparência */
+.painel-pesquisa-fundo {
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Fundo branco com 80% de opacidade */
+    border-radius: 12px;
+    /* Cantos arredondados */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* Espaçamento entre os campos de input */
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Estilo para cada campo de input individual */
+.campo-input-individual {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Empurra o ícone para a direita */
+    background-color: white;
+    /* Fundo sólido branco */
+    border: 2px solid black;
+    /* Borda preta e mais grossa */
+    border-radius: 8px;
+    /* Cantos arredondados */
+    padding: 12px 15px;
+    width: 100%;
+    /* Ocupa o espaço disponível */
+}
+
+/* Define o tamanho dos campos */
+.campo-input-individual.local {
+    flex-grow: 2;
+    /* Faz o campo de local ser 2x maior que os outros */
+}
+
+.campo-input-individual.data,
+.campo-input-individual.hora {
+    flex-grow: 1;
+    /* Tamanho base */
+}
+
+/* Estilo do texto dentro do input */
+.campo-input-individual input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    width: 90%;
+    /* Garante que o texto não sobreponha o ícone */
+}
+
+.campo-input-individual input::placeholder {
+    color: #555;
+    font-weight: 500;
+}
+
+/* Estilo do ícone */
+.campo-input-individual img {
+    height: 24px;
+}
+
+
+/* ======================================================= */
+/* RESPONSIVIDADE PARA A NOVA BARRA DE PESQUISA            */
+/* ======================================================= */
+
+@media (max-width: 900px) {
+    .painel-pesquisa-fundo {
+        flex-direction: column;
+        align-items: stretch;
+        /* Faz os itens ocuparem toda a largura */
+        background-color: transparent;
+        /* Remove o painel de fundo no mobile */
+        padding: 0;
+    }
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.form-pesquisa-container {
+    background-color: white;
+    border-radius: 50px;
+    /* Bordas bem arredondadas (pill-shape) */
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    width: 100%;
+}
+
+.campo-grupo {
+    flex: 3;
+    /* O primeiro campo ocupa mais espaço */
+    padding: 0 15px;
+    position: relative;
+}
+
+.campo-grupo.campo-pequeno {
+    flex: 1;
+    /* Os campos de data e hora ocupam menos espaço */
+    border-left: 1px solid #e0e0e0;
+}
+
+.campo-grupo label {
+    display: block;
+    position: absolute;
+    top: -35px;
+    /* Posição acima da barra branca */
+    left: 15px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-wrapper input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 1rem;
+    color: #555;
+}
+
+.input-wrapper input::placeholder {
+    color: #999;
+}
+
+.input-wrapper img {
+    height: 20px;
+    opacity: 0.6;
+}
+
+/* ======================================================= */
+/* 8. SEÇÃO DE ANÚNCIOS (SLIDER) - TAMANHO AJUSTADO        */
+/* ======================================================= */
+
+.secao-anuncios {
+    width: 100%;
+    background-color: white;
+    /* Reduzindo o padding vertical */
+    padding: 120px 20px;
+    /* Antes estava 160px 20px */
+    overflow: hidden;
+}
+
+.container-anuncios {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.seta-slider {
+    background-color: #333;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.seta-slider:hover {
+    background-color: #0056b3;
+}
+
+.seta-slider img {
+    height: 15px;
+}
+
+.conteudo-anuncio {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+.texto-anuncio {
+    position: relative;
+    z-index: 2;
+    margin-right: -60px;
+    /* Pequeno ajuste */
+}
+
+.texto-anuncio h2 {
+    /* Reduzindo um pouco o tamanho da fonte */
+    font-size: 4.0rem;
+    /* Antes estava 4.5rem */
+    color: #003366;
+    line-height: 1.1;
+}
+
+.imagem-anuncio {
+    position: relative;
+    z-index: 2;
+}
+
+.imagem-anuncio img {
+    /* Reduzindo um pouco a largura máxima */
+    max-width: 650px;
+    /* Antes estava 700px */
+    height: auto;
+    display: block;
+}
+
+.forma-fundo {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    /* Reduzindo a altura da forma */
+    height: 450px;
+    /* Antes estava 500px */
+    background-color: #e0f0ff;
+    border-radius: 220px 45px 220px 45px;
+    /* Ajuste nas bordas */
+    transform: rotate(-10deg);
+}
+
+/* ======================================================= */
+/* 9. RESPONSIVIDADE PARA AS NOVAS SEÇÕES                  */
+/* ======================================================= */
+
+@media (max-width: 900px) {
+    .form-pesquisa-container {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .campo-grupo {
+        width: 100%;
+    }
+
+    .campo-grupo.campo-pequeno {
+        border-left: none;
+        border-top: 1px solid #e0e0e0;
+        padding-top: 20px;
+    }
+
+    .campo-grupo label {
+        position: static;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .conteudo-anuncio {
+        flex-direction: column;
+    }
+
+    .texto-anuncio {
+        margin-right: 0;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .texto-anuncio h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .seta-slider {
+        display: none;
+        /* Esconde as setas em telas muito pequenas */
+    }
+}

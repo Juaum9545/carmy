@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarMy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="imagens/logo_logo.png" alt="Logo CarMy">
+        </div>
+
+        <nav class="navegacao">
+            <button>ALUGAR</button> <button>QUEM SOMOS</button>
+            <button>MINHA CONTA</button>
+            <button class="btn-suporte-mobile">SUPORTE</button>
+        </nav>
+
+        <div class="suporte-desktop">
+            <img src="imagens/logo_suporte.png" alt="Ícone de Suporte">
+            <button>SUPORTE</button>
+        </div>
+
+        <button class="menu-hamburger" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <section class="secao-pesquisa">
+        <div class="container">
+
+            <div class="painel-pesquisa-fundo">
+
+                <div class="campo-input-individual local">
+                    <input type="text" placeholder="LOCAL DE RETIRADA">
+                    <img src="imagens/icone_local.png" alt="Ícone de localização">
+                </div>
+
+                <div class="campo-input-individual data">
+                    <input type="text" placeholder="DATA" onfocus="(this.type='date')">
+                    <img src="imagens/icone_calendario.png" alt="Ícone de calendário">
+                </div>
+
+                <div class="campo-input-individual hora">
+                    <input type="text" placeholder="HORA" onfocus="(this.type='time')">
+                    <img src="imagens/icone_relogio.png" alt="Ícone de relógio">
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <section class="secao-anuncios">
+        <div class="container-anuncios">
+            <button class="seta-slider" aria-label="Anúncio anterior">
+                <img src="imagens/icone_seta_esquerda.png" alt="Seta para esquerda">
+            </button>
+
+            <div class="conteudo-anuncio">
+                <div class="texto-anuncio">
+                    <h2>SEU CARRO PARA SUA<br>VIAGEM EM FAMÍLIA</h2>
+                </div>
+                <div class="imagem-anuncio">
+                    <img src="imagens/imagem-casal-carro.png" alt="Casal feliz dentro de um carro">
+                </div>
+                <div class="forma-fundo"></div>
+            </div>
+
+            <button class="seta-slider" aria-label="Próximo anúncio">
+                <img src="imagens/icone_seta_direita.png" alt="Seta para direita">
+            </button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
